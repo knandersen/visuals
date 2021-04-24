@@ -1,0 +1,17 @@
+{
+  "name": "three-base",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kevin Nørby Andersen",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.127.0"
+  },
+  "scripts": {
+    "build": "parcel build index.html --public-url ./",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
