@@ -8,8 +8,11 @@
     "three": "^0.127.0"
   },
   "scripts": {
-    "build": "parcel build index.html --public-url ./",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
+    "dev": "parcel index.html",
+    "clean": "rm -rf ./dist",
+    "build": "parcel build index.html --public-url ./ && cp ./CNAME ./dist/CNAME",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
+    "deploy": "yarn clean && yarn build && yarn push-gh-pages"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
