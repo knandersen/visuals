@@ -4,17 +4,18 @@
   "main": "index.js",
   "author": "Kevin Nørby Andersen",
   "license": "MIT",
+  "source":"src/index.html",
   "dependencies": {
     "three": "^0.127.0"
   },
   "scripts": {
-    "dev": "parcel index.html",
+    "start": "parcel",
     "clean": "rm -rf ./dist",
-    "build": "parcel build index.html --public-url ./ && cp ./CNAME ./dist/CNAME",
+    "build": "parcel build --public-url ./ && cp ./CNAME ./dist/CNAME",
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
     "deploy": "yarn clean && yarn build && yarn push-gh-pages"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel": "latest"
   }
 }

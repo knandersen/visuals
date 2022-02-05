@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
-import glb from './assets/glb.glb'
 import helveticaJSON from 'three/examples/fonts/helvetiker_bold.typeface.json'
 import {DRACOLoader} from 'three/examples/jsm/loaders/DRACOLoader'
-
+const glb = new URL('../assets/glb.glb',import.meta.url)
 const dracoLoader = new DRACOLoader()
 
 // set up a renderer
@@ -26,7 +25,7 @@ const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader)
 
 let loadedGlb = null
-loader.load(glb, (gltf) => 		{ loadedGlb = gltf.scene; loadedGlb.scale.set(10,10,10) })
+loader.load(glb.href, (gltf) => 		{ loadedGlb = gltf.scene; loadedGlb.scale.set(10,10,10) })
 
 // lets create a camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 5000)
