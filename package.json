@@ -11,14 +11,14 @@
     "tone": "^14.7.77"
   },
   "scripts": {
-    "start": "parcel",
+    "start": "parcel src/index.html",
     "clean": "rm -rf ./dist && rm -rf ./.parcel-cache",
     "build": "parcel build --public-url ./",
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
     "deploy": "yarn clean && yarn build && yarn push-gh-pages"
   },
   "devDependencies": {
-    "@parcel/transformer-glsl": "2.5.0",
+    "@parcel/transformer-glsl": "2.7.0",
     "parcel": "^2.6.2"
   }
 }
