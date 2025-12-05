@@ -1,23 +1,26 @@
 import { saveAs } from "file-saver";
 
 export default class CanvasRecorder {
-    constructor(canvas,gui,filename,recorder) {
+    constructor(canvas, gui, filename, recorder) {
         this.canvas = canvas
         this.gui = gui
         this.filename = filename;
         this.recorder = recorder
-        this.framerate = 50;
+        this.framerate = 24;
         this.recording = [];
         this.mediaRecorder = null;
         this.options = {
             // videoBitsPerSecond: 20000000,
             // mimeType: 'video/mp4'
+            mimeType: 'video/webm;codecs=vp9',
+            videoBitsPerSecond: 30000000
+            // mimeType: 'video/mp4; codecs=avc1.42E01E'
             // mimeType: 'video/webm;codecs=h264,vp9,opus' compatible chrome not safari
-            mimeType: 'video/webm;codecs=avc1'
+            // mimeType: 'video/webm;codecs=avc1'
         }
 
-        this.gui.add({startRecording:() => { this.startRecording()}},"startRecording").name('start recording')
-        this.gui.add({stopRecording:() => { this.stopAndSaveRecording()}},"stopRecording").name('stop recording')
+        this.gui.add({ startRecording: () => { this.startRecording() } }, "startRecording").name('start recording')
+        this.gui.add({ stopRecording: () => { this.stopAndSaveRecording() } }, "stopRecording").name('stop recording')
 
     }
 
@@ -30,27 +33,27 @@ export default class CanvasRecorder {
         this.mediaRecorder.ondataavailable = this.onDataAvailable.bind(this);
         this.mediaRecorder.onerror = this.onError.bind(this);
         this.mediaRecorder.onstart = this.onStart.bind(this)
-        this.mediaRecorder.start();        
+        this.mediaRecorder.start();
     }
 
     onDataAvailable(event) {
         console.log("data-available");
         if (event.data.size > 0) {
-          this.recording.push(event.data);
-          console.log(this.recording);
-          const blob = new Blob(this.recording, {
-            type: "video/mp4"
-        }) 
-        saveAs(blob,this.filename)
-        this.stream = null
-        this.recording = []
-        this.mediaRecorder = null
+            this.recording.push(event.data);
+            console.log(this.recording);
+            const blob = new Blob(this.recording, {
+                type: "video/mp4"
+            })
+            saveAs(blob, this.filename)
+            this.stream = null
+            this.recording = []
+            this.mediaRecorder = null
         } else {
-          console.log("nope nothing");
+            console.log("nope nothing");
         }
-      }
+    }
 
-    onError(event){
+    onError(event) {
         console.log(event)
     }
 
@@ -63,6 +66,6 @@ export default class CanvasRecorder {
         console.log("Stopping recording...");
         this.mediaRecorder.stop()
         this.recorder.stop()
-        this.stream.getTracks().forEach(track => track.stop())        
+        this.stream.getTracks().forEach(track => track.stop())
     }
 }

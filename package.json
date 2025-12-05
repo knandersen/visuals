@@ -1,24 +1,20 @@
 {
   "name": "visuals",
+  "private": true,
   "version": "1.0.0",
-  "author": "Kevin Nørby Andersen",
-  "license": "MIT",
-  "source": "src/index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite serve src/",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  },
   "dependencies": {
     "dat.gui": "^0.7.9",
     "file-saver": "^2.0.5",
-    "three": "^0.141.0",
+    "three": "^0.162.0",
     "tone": "^14.7.77"
-  },
-  "scripts": {
-    "start": "parcel src/index.html",
-    "clean": "rm -rf ./dist && rm -rf ./.parcel-cache",
-    "build": "parcel build --public-url ./",
-    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose",
-    "deploy": "yarn clean && yarn build && yarn push-gh-pages"
-  },
-  "devDependencies": {
-    "@parcel/transformer-glsl": "2.7.0",
-    "parcel": "^2.6.2"
   }
 }
